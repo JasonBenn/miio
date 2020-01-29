@@ -8,7 +8,7 @@ createdb:
 	createdb -W -h 127.0.0.1 miio -U miio -p 5432
 	web/manage.py migrate
 	echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'nah@nah.com', 'admin')" | python web/manage.py shell
-	# ./manage.py seed_db
+	web/manage.py seed_db
 
 dropdb:
 	dropdb miio
