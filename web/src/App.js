@@ -7,6 +7,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import {Stack} from "./components/Stack";
 
 function Example(props) {
     return (
@@ -21,6 +22,7 @@ function Example(props) {
 
 export default function App() {
     const [count, setCount] = useState(0);
+    const [cards, setCards] = useState([]);
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -32,6 +34,7 @@ export default function App() {
     useEffect(() => {
         getCards().then(response => {
             console.log(response.data)
+            setCards(response.data)
         })
     }, [])
 
@@ -62,7 +65,7 @@ export default function App() {
                         <Cards/>
                     </Route>
                     <Route path="/">
-                        <Example count={count} setCount={setCount}/>
+                        <Stack cards={cards}/>
                     </Route>
                 </Switch>
             </div>

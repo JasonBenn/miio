@@ -1,5 +1,5 @@
 import { instance } from './services'
 
 export const getCards = () => {
-    return instance.get('/cards/')
+    return instance.get('/api/cards/')
 }
