@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.urls import re_path
 
 from miio import views
 
@@ -62,3 +63,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
 ]
+
+# this always comes at the end so we can match api urls before this "catch all"
+urlpatterns += [re_path(r".*", views.index)]
