@@ -130,5 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+REACT_APP_DIR = os.path.abspath(os.path.join('web'))
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_DIR, 'build', 'static'),
+]
 
 CSRF_COOKIE_NAME = "XSRF-TOKEN"

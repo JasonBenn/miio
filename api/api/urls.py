@@ -59,10 +59,7 @@ router.register(r'cards', CardViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', views.index, name='index'),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+    re_path(r'.*', views.FrontendAppView.as_view()),
 ]
-
-# this always comes at the end so we can match api urls before this "catch all"
-urlpatterns += [re_path(r".*", views.index)]

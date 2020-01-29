@@ -18,3 +18,7 @@ psql:
 
 migrate:
 	api/manage.py migrate
+
+deploy:
+	yarn build
+	rsync api web/build some-instance

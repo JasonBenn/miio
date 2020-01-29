@@ -1,0 +1,7 @@
+import ReactDOM from "react-dom";
+import * as axios from 'axios'
+
+export const instance = axios.create({
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});
