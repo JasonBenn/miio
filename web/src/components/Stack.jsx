@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FullCard } from "./FullCard";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { ActiveCard } from "./ActiveCard";
 import {
   AddOrSearchButton,
@@ -15,10 +14,16 @@ const StyledStack = styled.div`
   margin-top: 60x;
 `;
 
+const BottomNavigation = styled.div`
+  position: absolute;
+  bottom: 90px;
+  display: flex;
+`;
+
 export const Stack = props => {
   const [activeCardId, setActiveCardId] = useState();
 
-  const cardComponents = props.cards.map(({ id, title, body }) => (
+  const cardComponents = props.cards.map((i, { id, title, body }) => (
     <FullCard id={id} title={title} body={body}></FullCard>
   ));
 
@@ -35,11 +40,11 @@ export const Stack = props => {
         <StyledStack>
           {props.cards.length ? cardComponents : <div>Loading...</div>}
         </StyledStack>
-        <nav>
+        <BottomNavigation>
           <SourcesButton />
           <AddOrSearchButton />
           <HistoryButton />
-        </nav>
+        </BottomNavigation>
       </div>
     );
   }
