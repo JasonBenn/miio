@@ -1,11 +1,12 @@
-import React from 'react'
-import {Link} from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
+import { BackButton } from "./Buttons";
 
-export const ActiveCard = (props) => {
-    return (
-        <div>
-            ActiveCard
-            <Link to="/">X</Link>
-        </div>
-    )
-}
+export const ActiveCard = props => {
+  return (
+    <div>
+      ActiveCard
+      <BackButton />
+    </div>
+  );
+};

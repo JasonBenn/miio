@@ -3,6 +3,12 @@ import { FullCard } from "./FullCard";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ActiveCard } from "./ActiveCard";
+import {
+  AddOrSearchButton,
+  BackButton,
+  HistoryButton,
+  SourcesButton
+} from "./Buttons";
 
 const StyledStack = styled.div`
   margin: 0 20px;
@@ -17,7 +23,12 @@ export const Stack = props => {
   ));
 
   if (activeCardId) {
-    return <ActiveCard activeCardId={activeCardId} />;
+    return (
+      <div>
+        <ActiveCard activeCardId={activeCardId} />;
+        <BackButton />
+      </div>
+    );
   } else {
     return (
       <div>
@@ -25,17 +36,9 @@ export const Stack = props => {
           {props.cards.length ? cardComponents : <div>Loading...</div>}
         </StyledStack>
         <nav>
-          <ul>
-            <li>
-              <Link to="/sources">Sources</Link>
-            </li>
-            <li>
-              <Link to="/add-or-search">Add or Search</Link>
-            </li>
-            <li>
-              <Link to="/history">History</Link>
-            </li>
-          </ul>
+          <SourcesButton />
+          <AddOrSearchButton />
+          <HistoryButton />
         </nav>
       </div>
     );
