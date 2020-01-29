@@ -1,9 +1,20 @@
 import logging
 import os
 
-from django.views.generic import View
-from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.views.generic import View
+from rest_framework import renderers
+from rest_framework import serializers
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+from miio import models
+from miio.models import Card
+from miio.read import get_all_unarchived_cards
+from miio.write import archive
 
 
 class FrontendAppView(View):
@@ -26,3 +37,36 @@ class FrontendAppView(View):
                 """,
                 status=501,
             )
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'is_staff']
+
+
+class CardSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Card
+        fields = '__all__'
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class CardViewSet(viewsets.ModelViewSet):
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
+
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def archive(self, request, *args, **kwargs):
+        card = self.get_object()
+        return Response(archive(card))
+
+    @action(detail=False)
+    def get_all_unarchived(self, request, *args, **kwargs):
+        print(get_all_unarchived_cards(self.queryset))
+        return Response(self.queryset)
+

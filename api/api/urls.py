@@ -17,49 +17,23 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from django.urls import re_path
+from rest_framework import routers
 
 from miio import views
 
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-
-
-# Serializers define the API representation.
-from miio.models import Card
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
-
-
-class CardSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Card
-        fields = '__all__'
-
-
 # ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
-
-# ViewSets define the view behavior.
-class CardViewSet(viewsets.ModelViewSet):
-    queryset = Card.objects.all()
-    serializer_class = CardSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'cards', CardViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'cards', views.CardViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+
     re_path(r'.*', views.FrontendAppView.as_view()),
 ]
