@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import re_path
 
 from miio import views
 
@@ -22,3 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
 ]
+
+# this always comes at the end so we can match api urls before this "catch all"
+urlpatterns += [re_path(r".*", views.index)]
