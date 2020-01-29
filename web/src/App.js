@@ -8,6 +8,9 @@ import {
     Link
 } from "react-router-dom";
 import {Stack} from "./components/Stack";
+import {Sources} from "./components/Sources";
+import {History} from "./components/History";
+import {AddOrSearch} from "./components/AddOrSearch";
 
 function Example(props) {
     return (
@@ -41,28 +44,17 @@ export default function App() {
     return (
         <Router>
             <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/cards">Cards</Link>
-                        </li>
-                    </ul>
-                </nav>
-
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                 <Switch>
-                    <Route path="/about">
-                        <About/>
+                    <Route path="/sources">
+                        <Sources/>
                     </Route>
-                    <Route path="/cards">
-                        <Cards/>
+                    <Route path="/history">
+                        <History/>
+                    </Route>
+                    <Route path="/add-or-search">
+                        <AddOrSearch/>
                     </Route>
                     <Route path="/">
                         <Stack cards={cards}/>
