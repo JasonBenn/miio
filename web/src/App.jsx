@@ -43,7 +43,6 @@ export default function App() {
           <Route path="/sources">
             <Sources />
           </Route>
-
           <Route path="/history">
             <History />
           </Route>
