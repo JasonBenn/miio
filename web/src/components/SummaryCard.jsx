@@ -35,13 +35,7 @@ const StyledFullCard = styled.div`
   }}px;
 `;
 
-export const SummaryCard = ({
-  stackIndex,
-  id,
-  title,
-  body,
-  setActiveCardId
-}) => {
+export const SummaryCard = ({ stackIndex, id, title, body }) => {
   return (
     <StyledFullCard key={id} stackIndex={stackIndex}>
       <h1>{title}</h1>

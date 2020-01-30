@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { getCards } from "./api";
 
@@ -9,12 +10,17 @@ import { AddOrSearch } from "./components/AddOrSearch";
 
 export default function App() {
   const [cards, setCards] = useState([]);
+  const [activeCard, setActiveCard] = useState();
 
   useEffect(() => {
     getCards().then(response => {
       setCards(response.data);
     });
   }, []);
+
+  const stackClicked = e => {
+    setActiveCard(cards[0]);
+  };
 
   return (
     <Router>
@@ -31,7 +37,9 @@ export default function App() {
           <AddOrSearch />
         </Route>
         <Route path="/">
-          <Stack cards={cards} />
+          <div onClick={stackClicked}>
+            <Stack activeCard={activeCard} cards={cards} />
+          </div>
         </Route>
       </Switch>
       <link

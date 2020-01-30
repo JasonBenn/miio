@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { SummaryCard } from "./SummaryCard";
 import styled from "styled-components";
 import { ActiveCard } from "./ActiveCard";
-import _ from "lodash";
 import {
   AddOrSearchButton,
   BackButton,
@@ -26,8 +25,6 @@ const BottomNavigation = styled.div`
 `;
 
 export const Stack = props => {
-  const [activeCardId, setActiveCardId] = useState();
-
   const cardComponents = props.cards
     .filter((card, i) => {
       return i < 3;
@@ -45,24 +42,17 @@ export const Stack = props => {
     })
     .reverse();
 
-  if (activeCardId) {
-    console.log(_.find(props.cards, x => x.id === activeCardId));
+  if (props.activeCard) {
     return (
       <>
-        <ActiveCard
-          // id={id}
-          // title={title}
-          // body={body}
-          activeCardId={activeCardId}
-        />
-        ;
+        <ActiveCard activeCard={props.activeCard} />
         <BackButton />
       </>
     );
   } else {
     return (
       <>
-        <StyledStack setActiveCardId={setActiveCardId}>
+        <StyledStack>
           {props.cards.length ? cardComponents : <div>Loading...</div>}
         </StyledStack>
         <BottomNavigation>
