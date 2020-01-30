@@ -12,7 +12,6 @@ const StyledCircleButton = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const StyledBigBlackButton = styled.div``;
 
 export const BackButton = props => {
   return (

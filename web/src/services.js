@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import * as axios from 'axios'
 
 export const instance = axios.create({

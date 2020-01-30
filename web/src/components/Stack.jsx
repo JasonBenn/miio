@@ -33,7 +33,15 @@ export const Stack = props => {
       return i < 3;
     })
     .map(({ id, title, body }, i) => {
-      return <SummaryCard stackIndex={i} id={id} title={title} body={body} />;
+      return (
+        <SummaryCard
+          key={id.toString()}
+          stackIndex={i}
+          id={id}
+          title={title}
+          body={body}
+        />
+      );
     })
     .reverse();
 

@@ -22,7 +22,6 @@ const StyledFullCard = styled.div`
   width: 275px;
   transform: scale(${props => Math.pow(0.75, props.stackIndex)});
   margin-top: ${props => {
-    console.log(props);
     switch (props.stackIndex) {
       case 0:
         return 0;
@@ -30,6 +29,8 @@ const StyledFullCard = styled.div`
         return 80;
       case 2:
         return 140;
+      default:
+        throw Error("uhh");
     }
   }}px;
 `;
@@ -41,7 +42,6 @@ export const SummaryCard = ({
   body,
   setActiveCardId
 }) => {
-  console.log(stackIndex);
   return (
     <StyledFullCard key={id} stackIndex={stackIndex}>
       <h1>{title}</h1>

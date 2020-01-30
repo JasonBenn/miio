@@ -48,7 +48,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class CardSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Card
-        fields = '__all__'
+        fields = ['id', 'title', 'body', 'url']
 
 
 class UserViewSet(viewsets.ModelViewSet):
