@@ -1,7 +1,7 @@
 SHELL := /usr/bin/env bash
 
 initdb:
-	createuser -s -P miio
+	createuser -U postgres -s -P miio
 
 createdb:
 	echo "make password miio"
