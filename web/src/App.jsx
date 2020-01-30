@@ -36,24 +36,22 @@ export default function App() {
 
   return (
     <Router>
-      <div>
-        {/* A <Switch> looks through its children <Route>s and
+      {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/sources">
-            <Sources />
-          </Route>
-          <Route path="/history">
-            <History />
-          </Route>
-          <Route path="/add-or-search">
-            <AddOrSearch />
-          </Route>
-          <Route path="/">
-            <Stack cards={cards} />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/sources">
+          <Sources />
+        </Route>
+        <Route path="/history">
+          <History />
+        </Route>
+        <Route path="/add-or-search">
+          <AddOrSearch />
+        </Route>
+        <Route path="/">
+          <Stack cards={cards} />
+        </Route>
+      </Switch>
       <link
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         rel="stylesheet"

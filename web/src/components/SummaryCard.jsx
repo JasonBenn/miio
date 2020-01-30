@@ -1,19 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledSummaryCard = styled.div`
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  border: 1px solid black;
-  box-shadow: 0px 12px 0px rgba(0, 0, 0, 0.06);
-  border-radius: 36px;
-`;
-
 const StyledFullCard = styled.div`
+  font-family: Helvetica Neue;
+  line-height: 1.2;
+  h1 {
+    font-weight: 300;
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 20px;
+  }
   border: 1px solid black;
   box-shadow: 0px 12px 0px rgba(0, 0, 0, 0.06);
   border-radius: 36px;
@@ -21,8 +19,19 @@ const StyledFullCard = styled.div`
   position: absolute;
   background: white;
   padding: 30px;
-  margin-top: ${props => props.stackIndex * 26}px;
-  width: calc(275px - ${props => props.stackIndex * 45}px);
+  width: 275px;
+  transform: scale(${props => Math.pow(0.75, props.stackIndex)});
+  margin-top: ${props => {
+    console.log(props);
+    switch (props.stackIndex) {
+      case 0:
+        return 0;
+      case 1:
+        return 80;
+      case 2:
+        return 140;
+    }
+  }}px;
 `;
 
 export const SummaryCard = ({
@@ -35,8 +44,8 @@ export const SummaryCard = ({
   console.log(stackIndex);
   return (
     <StyledFullCard key={id} stackIndex={stackIndex}>
-      <div>{title}</div>
-      <div>{body}</div>
+      <h1>{title}</h1>
+      <p>{body}</p>
     </StyledFullCard>
   );
 };

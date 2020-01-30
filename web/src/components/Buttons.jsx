@@ -8,6 +8,9 @@ const StyledCircleButton = styled.div`
   height: 70px;
   border-radius: 70px;
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledBigBlackButton = styled.div``;
 
@@ -25,7 +28,7 @@ export const SourcesButton = props => {
   return (
     <Link to="/sources">
       <StyledCircleButton>
-        <FA name={"inbox"} />
+        <FA name={"inbox"} size={"2x"} />
       </StyledCircleButton>
     </Link>
   );
@@ -36,7 +39,7 @@ export const AddOrSearchButton = props => {
     <Link to="/add-or-search">
       {" "}
       <StyledCircleButton>
-        <FA name={"plus"} />
+        <FA name={"plus"} size={"3x"} />
       </StyledCircleButton>
     </Link>
   );
@@ -47,7 +50,7 @@ export const HistoryButton = props => {
     <Link to="/history">
       {" "}
       <StyledCircleButton>
-        <FA name={"clock"} />
+        <FA name={"history"} size={"2x"} />
       </StyledCircleButton>
     </Link>
   );

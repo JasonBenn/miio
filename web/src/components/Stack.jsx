@@ -11,34 +11,36 @@ import {
 } from "./Buttons";
 
 const StyledStack = styled.div`
-  margin: 0 20px;
   margin-top: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const BottomNavigation = styled.div`
   position: absolute;
   bottom: 90px;
   display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 `;
 
 export const Stack = props => {
   const [activeCardId, setActiveCardId] = useState();
 
   const cardComponents = props.cards
-    .map(({ id, title, body }, i) => (
-      <SummaryCard
-        stackIndex={i}
-        id={id}
-        title={title}
-        body={body}
-      ></SummaryCard>
-    ))
+    .filter((card, i) => {
+      return i < 3;
+    })
+    .map(({ id, title, body }, i) => {
+      return <SummaryCard stackIndex={i} id={id} title={title} body={body} />;
+    })
     .reverse();
 
   if (activeCardId) {
     console.log(_.find(props.cards, x => x.id === activeCardId));
     return (
-      <div>
+      <>
         <ActiveCard
           // id={id}
           // title={title}
@@ -47,11 +49,11 @@ export const Stack = props => {
         />
         ;
         <BackButton />
-      </div>
+      </>
     );
   } else {
     return (
-      <div>
+      <>
         <StyledStack setActiveCardId={setActiveCardId}>
           {props.cards.length ? cardComponents : <div>Loading...</div>}
         </StyledStack>
@@ -60,7 +62,7 @@ export const Stack = props => {
           <AddOrSearchButton />
           <HistoryButton />
         </BottomNavigation>
-      </div>
+      </>
     );
   }
 };
