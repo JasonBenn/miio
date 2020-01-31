@@ -9,6 +9,7 @@ const StyledStack = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  height: 22.5em;
 `;
 
 // TODO: unify with BottomNav
@@ -67,9 +68,12 @@ export const Stack = props => {
   } else {
     return (
       <>
-        <StyledStack>
-          {props.cards.length ? cardComponents : <div>Loading...</div>}
-        </StyledStack>
+        {" "}
+        <div onClick={props.stackClicked}>
+          <StyledStack>
+            {props.cards.length ? cardComponents : <div>Loading...</div>}
+          </StyledStack>
+        </div>
         <BottomNavigation>
           <SourcesButton />
           <AddOrSearchButton />

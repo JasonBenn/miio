@@ -34,13 +34,12 @@ export default function App() {
           <AddOrSearch />
         </Route>
         <Route path="/">
-          <div onClick={stackClicked}>
-            <Stack
-              setActiveCard={setActiveCard}
-              activeCard={activeCard}
-              cards={cards}
-            />
-          </div>
+          <Stack
+            setActiveCard={setActiveCard}
+            activeCard={activeCard}
+            cards={cards}
+            stackClicked={stackClicked}
+          />
         </Route>
       </Switch>
     </Router>

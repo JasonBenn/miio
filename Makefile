@@ -24,6 +24,7 @@ deploy:
 	yarn --cwd ./web install
 	yarn --cwd ./web build
 	make sync
+	ssh jasonbenn@35.185.235.216 "miio/api/manage.py migrate"
 
 sync:
 	rsync --delete -avzr --include=api --include=api/* --include=web --include=web/build/ --include=web/build/* --exclude='web/*' --filter=':- .gitignore' . jasonbenn@35.185.235.216:/home/jasonbenn/miio
