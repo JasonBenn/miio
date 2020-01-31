@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledFullCard = styled.div`
+const StyledSummaryCard = styled.div`
   font-family: Helvetica Neue;
   line-height: 1.2;
   h1 {
@@ -9,9 +9,6 @@ const StyledFullCard = styled.div`
     font-size: 40px;
   }
 
-  p {
-    font-size: 20px;
-  }
   border: 1px solid black;
   box-shadow: 0px 12px 0px rgba(0, 0, 0, 0.06);
   border-radius: 36px;
@@ -37,9 +34,8 @@ const StyledFullCard = styled.div`
 
 export const SummaryCard = ({ stackIndex, id, title, body }) => {
   return (
-    <StyledFullCard key={id} stackIndex={stackIndex}>
+    <StyledSummaryCard key={id} stackIndex={stackIndex}>
       <h1>{title}</h1>
-      <p>{body}</p>
-    </StyledFullCard>
+    </StyledSummaryCard>
   );
 };
