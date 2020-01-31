@@ -1,6 +1,7 @@
 SHELL := /usr/bin/env bash
 
 initdb:
+	# might have to become OS user postgres to create: `sudo -u postgres -i`
 	createuser -U postgres -s -P miio
 
 createdb:
@@ -20,5 +21,16 @@ migrate:
 	api/manage.py migrate
 
 deploy:
-	yarn build
-	rsync api web/build some-instance
+	yarn --cwd ./web install
+	yarn --cwd ./web build
+	make sync
+
+sync:
+	rsync --delete -avzr --include=api --include=api/* --include=web --include=web/build/ --include=web/build/* --exclude='web/*' --filter=':- .gitignore' . jasonbenn@35.185.235.216:/home/jasonbenn/miio
+
+
+ssh-gcloud:
+	gcloud beta compute --project "miio-266719" ssh --zone "us-west1-b" "miio"
+
+ssh:
+	ssh jasonbenn@35.185.235.216
