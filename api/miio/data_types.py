@@ -1,5 +1,5 @@
-
 from django_enumfield import enum
+
 
 class CardType(enum.Enum):
     TWITTER = 0
@@ -7,3 +7,4 @@ class CardType(enum.Enum):
     FREEFORM = 2
     FLASH_CARD = 3
     NOTE = 4
+    PERSON = 5
