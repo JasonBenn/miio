@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from miio import models
 from miio.models import Card
 from miio.read import get_all_unarchived_cards
+from miio.read import get_ranked_cards
 from miio.write import archive
 
 
@@ -61,6 +62,11 @@ class UserViewSet(viewsets.ModelViewSet):
 class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
+
+    def list(self, request, **kwargs):
+        queryset = get_ranked_cards()
+        serializer = CardSerializer(queryset, many=True, context={'request': request})
+        return Response(serializer.data)
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def archive(self, request, *args, **kwargs):
