@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SummaryCard } from "./SummaryCard";
 import styled from "styled-components";
 import { ActiveCard } from "./ActiveCard";
 import { AddOrSearchButton, HistoryButton, SourcesButton } from "./Buttons";
+import { getCards } from "../api";
+import _ from "lodash";
 
 const StyledStack = styled.div`
   margin-top: 60px;
@@ -22,14 +24,49 @@ const BottomNavigation = styled.div`
   align-items: center;
 `;
 
-export const Stack = props => {
+export const Stack = () => {
+  const [cards, setCards] = useState([]);
+  const [activeCard, setActiveCard] = useState();
+
+  useEffect(() => {
+    getCards().then(response => {
+      setCards(response.data);
+    });
+  }, []);
+
+  const stackClicked = e => {
+    setActiveCard(cards[0]);
+  };
+
   const activeCardClicked = e => {
     e.stopPropagation();
-    props.setActiveCard();
+    setActiveCard();
+  };
+
+  const getSummaryCardStyle = stackIndex => {
+    const scale = Math.pow(0.75, stackIndex);
+    let marginTopOffset = 0;
+    switch (stackIndex) {
+      case 1:
+        marginTopOffset = 80;
+        break;
+      case 2:
+        marginTopOffset = 140;
+        break;
+      default:
+        marginTopOffset = 0;
+    }
+    return { transform: `scale(${scale})`, marginTop: `${marginTopOffset}px` };
   };
 
   function onSwipe(data) {
-    console.log("onSwipe", data);
+    setCards(_.drop(cards, 1));
+    if (cards.length < 5) {
+      getCards().then(response => {
+        cards.push(...response.data);
+        setCards([...cards]);
+      });
+    }
   }
 
   function onSwipeLeft(data) {
@@ -40,7 +77,7 @@ export const Stack = props => {
     console.log("onSwipeRight", data);
   }
 
-  const cardComponents = props.cards
+  const cardComponents = cards
     .filter((card, i) => {
       return i < 3;
     })
@@ -55,12 +92,12 @@ export const Stack = props => {
           id={id}
           title={title}
           body={body}
+          style={getSummaryCardStyle(i)}
         />
       );
     })
     .reverse();
 
-  let activeCard = props.activeCard;
   // activeCard = {
   //   url: "http://localhost:8000/api/cards/3/",
   //   id: 3,
@@ -83,9 +120,9 @@ export const Stack = props => {
     return (
       <>
         {" "}
-        <div onClick={props.stackClicked}>
+        <div onClick={stackClicked}>
           <StyledStack>
-            {props.cards.length ? cardComponents : <div>Loading...</div>}
+            {cards.length ? cardComponents : <div>Loading...</div>}
           </StyledStack>
         </div>
         <BottomNavigation>

@@ -8,19 +8,6 @@ import { History } from "./components/History";
 import { AddOrSearch } from "./components/AddOrSearch";
 
 export default function App() {
-  const [cards, setCards] = useState([]);
-  const [activeCard, setActiveCard] = useState();
-
-  useEffect(() => {
-    getCards().then(response => {
-      setCards(response.data);
-    });
-  }, []);
-
-  const stackClicked = e => {
-    setActiveCard(cards[0]);
-  };
-
   return (
     <Router>
       <Switch>
@@ -34,12 +21,7 @@ export default function App() {
           <AddOrSearch />
         </Route>
         <Route path="/">
-          <Stack
-            setActiveCard={setActiveCard}
-            activeCard={activeCard}
-            cards={cards}
-            stackClicked={stackClicked}
-          />
+          <Stack />
         </Route>
       </Switch>
     </Router>

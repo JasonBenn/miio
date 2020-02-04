@@ -18,19 +18,6 @@ const StyledSummaryCard = styled.div`
   background: white;
   padding: 30px;
   width: 275px;
-  transform: scale(${props => Math.pow(0.75, props.stackIndex)});
-  margin-top: ${props => {
-    switch (props.stackIndex) {
-      case 0:
-        return 0;
-      case 1:
-        return 80;
-      case 2:
-        return 140;
-      default:
-        throw Error("uhh");
-    }
-  }}px;
 `;
 
 export const SummaryCard = props => {
@@ -83,7 +70,7 @@ export const SummaryCard = props => {
 
   return (
     <Hammer onPan={onPan} onPanEnd={onPanEnd} className={classString}>
-      <StyledSummaryCard key={id} stackIndex={stackIndex}>
+      <StyledSummaryCard key={id} stackIndex={stackIndex} style={props.style}>
         <h1>{title}</h1>
       </StyledSummaryCard>
     </Hammer>
