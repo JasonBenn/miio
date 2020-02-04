@@ -28,6 +28,18 @@ export const Stack = props => {
     props.setActiveCard();
   };
 
+  function onSwipe(data) {
+    console.log("onSwipe", data);
+  }
+
+  function onSwipeLeft(data) {
+    console.log("onSwipeLeft", data);
+  }
+
+  function onSwipeRight(data) {
+    console.log("onSwipeRight", data);
+  }
+
   const cardComponents = props.cards
     .filter((card, i) => {
       return i < 3;
@@ -35,6 +47,9 @@ export const Stack = props => {
     .map(({ id, title, body }, i) => {
       return (
         <SummaryCard
+          onSwipeLeft={onSwipeLeft}
+          onSwipeRight={onSwipeRight}
+          onSwipe={onSwipe}
           key={id.toString()}
           stackIndex={i}
           id={id}
@@ -46,7 +61,6 @@ export const Stack = props => {
     .reverse();
 
   let activeCard = props.activeCard;
-
   // activeCard = {
   //   url: "http://localhost:8000/api/cards/3/",
   //   id: 3,
